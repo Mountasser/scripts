@@ -1,0 +1,4 @@
+curl 'localhost:9200/get-together/_mapping/new-events?include_type_name=true&pretty=true'
+curl -X PUT "localhost:9200/_all/_settings?pretty" -H 'Content-Type:application/json' -d'{ "index.blocks.read_only_allow_delete":null}'
+curl -XPUT  -H "Content-Type: application/json"  'localhost:9200/get-together/_mapping/new-events?include_type_name=true' -d '{"new-events":{"properties":{"host":{"type":"text"}}}}'
+
