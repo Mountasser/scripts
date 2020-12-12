@@ -1,8 +1,18 @@
+//Insert
 curl -XPUT 'localhost:9200/get-together/new-events/1' -d '{
  "name": "Late Night with Elasticsearch",
  "date": "2013-10-25T19:00"
 }'
+//Type
 curl 'localhost:9200/get-together/_mapping/new-events?include_type_name=true&pretty=true'
-curl -X PUT "localhost:9200/_all/_settings?pretty" -H 'Content-Type:application/json' -d'{ "index.blocks.read_only_allow_delete":null}'
+//change Type
 curl -XPUT  -H "Content-Type: application/json"  'localhost:9200/get-together/_mapping/new-events?include_type_name=true' -d '{"new-events":{"properties":{"host":{"type":"text"}}}}'
+
+curl -X PUT "localhost:9200/_all/_settings?pretty" -H 'Content-Type:application/json' -d'{ "index.blocks.read_only_allow_delete":null}'
+
+
+//Search
+ curl  -H 'Content-Type:application/json' 'localhost:9200/get-together/new-events/_search?pretty' -d '{
+ "query": { "query_string" : { "query" : "late"}}}'
+//
 
