@@ -15,4 +15,7 @@ curl -X PUT "localhost:9200/_all/_settings?pretty" -H 'Content-Type:application/
  curl  -H 'Content-Type:application/json' 'localhost:9200/get-together/new-events/_search?pretty' -d '{
  "query": { "query_string" : { "query" : "late"}}}'
 //
-
+ curl -XPUT -H 'Content-Type:application/json' 'localhost:9200/get-together/_mapping/weekly-events?include_type_name=true' -d '{
+ "weekly-events": {"properties":{"next-event":{"type": "date","format":"MMM DD YYYY"}}}}'
+ 
+ curl -v -XPUT "localhost:9200/get-together?pretty" -H 'Content-Type:application/json' -d '{	"mappings": {		"weekly-events": {			"properties": {				"next-event": {					"type": "date",					"format": "MMM DD YYYY"				}			}		}	}}'
